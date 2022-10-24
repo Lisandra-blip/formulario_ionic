@@ -1,0 +1,108 @@
+
+
+<form [formGroup]="formulario" (submit)="enviar()" >
+  <ion-list>
+
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>Informações gerais</ion-label>
+      </ion-item-divider>
+
+      <ion-item>
+        <ion-label position="floating">Nome</ion-label>
+        <ion-input formControlName="nome" placeholder="Enter text"></ion-input>
+        <ion-note *ngIf="formulario.controls.nome.touched" slot="error">
+          <span *ngIf="formulario.controls.nome.errors?.['required']"><ion-icon name="alert-outline"></ion-icon> Nome é obrigatório</span>
+          <span *ngIf="formulario.controls.nome.errors?.['minlength']"><ion-icon name="alert-outline"></ion-icon> No mínimo 3 caracteres</span>
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Sobrenome</ion-label>
+        <ion-input formControlName="sobrenome" placeholder="Enter text"></ion-input>
+        <ion-note *ngIf="formulario.controls.sobrenome.touched" slot="error">
+          <span *ngIf="formulario.controls.sobrenome.errors?.['required']"><ion-icon name="alert-outline"></ion-icon> Nome é obrigatório</span>
+          <span *ngIf="formulario.controls.sobrenome.errors?.['minlength']"><ion-icon name="alert-outline"></ion-icon> No mínimo 3 caracteres</span>
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">CPF:</ion-label>
+        <ion-input formControlName="CPF" placeholder="125-571-419.09"></ion-input>
+        <ion-note *ngIf="formulario.controls.CPF.touched" slot="error">
+          <span *ngIf="formulario.controls.CPF.errors?.['required']"><ion-icon name="alert-outline"></ion-icon> CPF é obrigatório</span>
+          <span *ngIf="formulario.controls.CPF.errors?.['CPFVallidator']"><ion-icon name="alert-outline"></ion-icon> CPF inválido.</span>
+        </ion-note>
+      </ion-item>
+
+    </ion-item-group>
+
+    <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Gênero</ion-label>
+        </ion-item-divider>
+      <ion-radio-group formControlName="genero" (ionChange)="verificaGenero($event.detail.value)">
+
+        <ion-item>
+          <ion-label>Feminino</ion-label>
+          <ion-radio  slot="end" value="feminino"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Masculino</ion-label>
+          <ion-radio slot="end" value="masculino"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Não Informado</ion-label>
+          <ion-radio slot="end" value="naoInformado"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Informar outro</ion-label>
+          <ion-radio slot="end" value="outro"></ion-radio>
+        </ion-item>
+
+        </ion-radio-group>
+
+        <ion-item *ngIf="idOutro">
+          <ion-input formControlName="outroGenero"></ion-input>
+          <ion-note *ngIf="formulario.controls.outroGenero.touched" slot="error">
+            <span *ngIf="formulario.controls.outroGenero.errors?.['required']"><ion-icon name="alert-outline"></ion-icon>É preciso informar o gênero</span>
+          </ion-note>
+        </ion-item>
+
+    </ion-item-group>
+
+    <ion-item-group>
+
+      <ion-item-divider>
+        <ion-label>Endereço completo</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label position="floating">CEP</ion-label>
+        <ion-input formControlName="CEP" (ionBlur)="verificaCep($event.detail.value)"></ion-input>
+        <ion-note *ngIf="formulario.controls.CEP.touched" slot="error">
+          <span *ngIf="formulario.controls.CEP.errors?.['pattern']"><ion-icon name="alert-outline"></ion-icon> CEP inválido</span>
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Rua</ion-label>
+        <ion-input formControlName="rua"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Bairro</ion-label>
+        <ion-input formControlName="bairro"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Cidade</ion-label>
+        <ion-input formControlName="cidade"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Estado</ion-label>
+        <ion-input formControlName="estado"></ion-input>
+      </ion-item>
+
+    </ion-item-group>
+
+  </ion-list>
+  <ion-button type="submit">Enviar</ion-button>
+</form>
